@@ -1,0 +1,134 @@
+<project>
+=========
+urls.py
+-------
+
+--- prije:
+from django.contrib import admin
+from django.urls import path
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+]
+
+--- poslije:
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+>>  path('', include('<app>.urls')),
+]
+
+settings.py
+-----------
+
+--- prije:
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+]
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
+--- poslije:
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+>>  'salda_konti.apps.SaldaKontiConfig',
+]
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+>>      'DIRS': ["templates"],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
+<app>
+=====
+
+>>> kreira se urls.py
+---------------------
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.home, name='home'),    
+]
+
+>>> kreira se folder templates
+------------------------------
+i u njemu se kreira početni index.html
+
+models.py
+---------
+
+--- prije:
+from django.db import models
+
+--- poslije:
+from django.db import models
+class <table_name>(models.Model):
+    <polje_1>=models.TextField(max_length=100, blank=True)    
+    ...
+    <polje_x>=models.FloatField()
+
+admin.py
+--------
+
+--- prije:
+from django.contrib import admin
+
+--- poslije:
+from django.contrib import admin
+>>from .models import <table_name>
+>>admin.site.register(<table_name>)
+
+    
+views.py    
+--------
+
+--- prije:
+from django.shortcuts import render
+
+--- poslije:
+from django.shortcuts import render
+from django.http import HttpResponse
+from .models import <table_name>
+import pyodbc
+
+def home(request):   
+    result = <table_name>.objects.all()
+    return render(request, "index.html", {'<table_name>': result})
+
+

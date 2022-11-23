@@ -1,0 +1,34 @@
+Terminal:
+=========
+
+> python -m venv env      = kreira se virtual enviroment (env) je ime environmenta
+> venv/scripts/activate   = aktivira se virtual enviroment
+
+Nakon što je kreiran i podešen (env)
+
+(env) > pip install autopep8
+(env) > pip install django
+(env) > django-admin startproject <project_name> .
+(env) > python manage.py startapp <app_name>
+(env) > python manage.py migrate
+(env) > python manage.py runserver (ovo je samo test django projekta)
+
+... slijedi početno podešavanje projekta i aplikacije
+
+­­= nakon podešavanja modela - kojime se definiraju tablice u bazi:
+save all
+<---- ovo se treba učiniti inicijalno ali i za svaku promjenu struktura tablica
+(env) python manage.py makemigrations
+(env) python manage.py migrate                  => <app_name>\migrations\0001_initial.py
+(env) python manage.py sqlmigrate <app_name> 0001 ... 0002.... => ovime se kreiraju tablica definirana u models.py
+>>> (env) python manage.py sqlmigrate salda_konti 0001 
+(env) python manage.py migrate <app_name>
+---->
+(env) python manage.py createsuperuser
+
+
+Git
+===
+- kako folder env ne bi bio u repositoriju 
+  kreira se u rootu file .gitignore i u 
+  njega se samo upiše env
