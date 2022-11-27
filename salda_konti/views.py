@@ -17,23 +17,47 @@ def connect_database(data_base):
     
     # # *** WORK\DBBETASOFT SERVER ***
     # server = 'WORK\DBBETASOFT'    
+    # # server = 'WORK\SQLEXPRESS12'       
+    # # server = 'WORK\SQLEXPRESS14'   
     # database = data_base
     # username = 'sa'
     # password = '@betaStudio2017'
-    # conn = pyodbc.connect('DRIVER={SQL Server};SERVER='+server+';DATABASE=' +
-    #                       database+';ENCRYPT=no;UID='+username+';PWD=' + password)
+    # conn = pyodbc.connect('DRIVER={SQL Server};SERVER='+server+';DATABASE=' + database+';ENCRYPT=no;UID='+username+';PWD=' + password)
+    # conn = pyodbc.connect('DRIVER={SQL Server Native Client 10.0};SERVER='+server+';DATABASE='+database+';ENCRYPT=no;UID='+username+';PWD='+ password)
+    # conn = pyodbc.connect('DRIVER={SQL Server Native Client 11.0};SERVER='+server+';DATABASE='+database+';ENCRYPT=no;UID='+username+';PWD='+ password)
+    # conn = pyodbc.connect('DRIVER={ODBC Driver 18 for SQL Server};SERVER='+server+';DATABASE='+database+';ENCRYPT=no;UID='+username+';PWD='+ password)
+    
+    # conn = pyodbc.connect('DRIVER={SQL Server Native Client 11.0};SERVER='+server+';DATABASE='+database+';ENCRYPT=no;UID='+username+';PWD='+ password)
+    # conn = pyodbc.connect('DRIVER={ODBC Driver 11 for SQL Server};SERVER='+server+';DATABASE='+database+';ENCRYPT=no;UID='+username+';PWD='+ password)
+    # conn = pyodbc.connect('DRIVER={ODBC Driver 11 for SQL Server};SERVER='+server+';DATABASE='+database+';ENCRYPT=no;UID='+username+';PWD='+ password)
 
-    # *** CESTING SERVER ***
+    # # *** CESTING SERVER ***
     server = '213.202.107.109,1433'
     database = data_base    
     username = 'sa'
     password = '@betaStudio2017'
-    conn = pyodbc.connect('DRIVER={SQL Server};SERVER='+server+';DATABASE='+database+';ENCRYPT=no;UID='+username+';PWD='+ password)
+    # ne radi na Cesting serveru
+    # # conn = pyodbc.connect('DRIVER={ODBC Driver 18 for SQL Server};SERVER='+server+';DATABASE='+database+';ENCRYPT=no;UID='+username+';PWD='+ password)
+
+    # # ovi rade
+    # # conn = pyodbc.connect('DRIVER={SQL Server};SERVER='+server+';DATABASE='+database+';ENCRYPT=no;UID='+username+';PWD='+ password)    
+    # # conn = pyodbc.connect('DRIVER={SQL Server Native Client 10.0};SERVER='+server+';DATABASE='+database+';ENCRYPT=no;UID='+username+';PWD='+ password)
+    # # conn = pyodbc.connect('DRIVER={SQL Server Native Client 11.0};SERVER='+server+';DATABASE='+database+';ENCRYPT=no;UID='+username+';PWD='+ password)
+    # conn = pyodbc.connect('DRIVER={SQL Server};SERVER='+server+';DATABASE='+database+';ENCRYPT=no;UID='+username+';PWD='+ password)    
+    conn = pyodbc.connect('DRIVER={ODBC Driver 11 for SQL Server};SERVER='+server+';DATABASE='+database+';ENCRYPT=no;UID='+username+';PWD='+ password)
     
     return conn
 
 
-def home(request):
+def home(request):    
+    # --- ISPISUJE DRIVERE ZA SPAJANJE SA SQL SERVEROM
+    # messages.error(request, "Instalirani driveri:")
+    # messages.error(request, "---")
+    # drivers = [item for item in pyodbc.drivers()]
+    # for driver in drivers:
+    #     messages.error(request, driver)
+    # messages.error(request, "---")
+    # ---
     return render(request, "index.html")
 
 def signin(request):

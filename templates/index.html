@@ -97,7 +97,7 @@
                 <!-- <div class="d-flex justify-content-center form_container"> -->
                 <div class="d-flex form_container justify-content-center">
                     <form method="POST" action="">
-                        <hr>
+                        <!-- <hr> -->
                         <div class="mt-2">
                             <div class="d-flex links">
                                 <a href="{% url 'rang_lista_kupci' %}" class="ml-2">1. Rang list kupaca</a>
@@ -115,14 +115,16 @@
                                     primanja</a>
                             </div>
                         </div>
-                        <hr>
+                        <!-- <hr> -->
                     </form>
 
                 </div>
                 <br>
+                <br>
                 <div class="mt-2">
                     <div class="d-flex justify-content-center links font-weight-normal">
-                        Prijavljeni ste kao {{user.first_name}} {{user.last_name}} <a href="{% url 'signout' %}" class="ml-2">Odjavi se</a>
+                        Prijavljeni ste kao {{user.first_name}} {{user.last_name}} <a href="{% url 'signout' %}"
+                            class="ml-2">Odjavi se</a>
                     </div>
                 </div>
                 {% for message in messages %}
@@ -149,7 +151,7 @@
                             <p>Vinkovačka cesta 63a, Osijek</p>
                         </div>
                     </div>
-                </div>                
+                </div>
                 <div class="d-flex justify-content-center form_container">
                     <form method="POST" action="">
                         <div class="mt-2">
@@ -167,6 +169,13 @@
                     {{ message }}
                 </div>
                 {% endfor %}
+
+                {% for item in drivers %}
+                {{item}}
+                {% endfor %}
+
+
+
                 <br>
             </div>
         </div>
