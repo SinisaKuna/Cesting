@@ -10,9 +10,64 @@
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <title>Cesting</title>
 </head>
-
+<script>
+    function myFunctionPrezime() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("inputPrezime");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+    function myFunctionObj() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("inputObj");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+    function myFunctionRmj() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("inputRmj");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[2];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
 <body>
-    <center>
+    <div class="container justify-content-center">
         <div class="mt-2">
             <div class="d-flex justify-content-center">
                 <h4 id="form-title">Cesting d.o.o.</h4>
@@ -24,14 +79,9 @@
                 <h5>Analiza prosjeka primanja</h5>
             </div>
         </div>
-        <!-- <div class="mt-2">
-            <div class="d-flex justify-content-center links font-weight-bold">
-                <a href="{% url 'home' %}" class="ml-2">Povratak na izbornik</a>
-            </div>
-        </div>         -->
-        <!-- search start  -->
+
         <nav class="navbar navbar-light bg-light">
-            <!-- <form class="form-inline"> -->
+
             <form>
                 <div class="row">
                     <div class="col">
@@ -50,90 +100,33 @@
             </form>
         </nav>
         <!-- search end  -->
-        <table id="myTable" class="table table-striped table-hover">
+        <table id="myTable" class="table table-sm table-striped table-hover">
             <thead>
                 <tr class="header">
-                    <th scope="col">PREZIME I IME</th>
-                    <th scope="col">OBRAČUNSKA JEDINICA</th>
-                    <th scope="col">RADNO MJESTO</th>
-                    <th align="left">NETO PLAĆA</th>
-                    <th align="left">BRUTO PLAĆA</th>
-                    <th align="left">BRUTO II PLAĆA</th>
+                    <th scope="col">Prezime i ime</th>
+                    <th scope="col">Obračunska jedinica</th>
+                    <th scope="col">Radno mjesto</th>
+                    <th align="left">Neto plaća</th>
+                    <th align="left">Bruto plaća</th>
+                    <th align="left">Bruto II plaća</th>
                 </tr>
             </thead>
             <tbody>
                 {% for item in AnalizaPlace %}
                 <tr>
-                    <td>{{item.prezime_ime}}</td>
-                    <td>{{item.obj}}</td>
-                    <td>{{item.radno_mjesto}}</td>
-                    <td align="right">{{item.netto}}</td>
-                    <td align="right">{{item.brutto}}</td>
-                    <td align="right">{{item.brutto_II}}</td>
+                    <td>{{item.0}}</td>
+                    <td>{{item.1}}</td>
+                    <td>{{item.2}}</td>
+                    <td align="right">{{item.3}}</td>
+                    <td align="right">{{item.4}}</td>
+                    <td align="right">{{item.5}}</td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
-    </center>
-
-    <script>
-        function myFunctionPrezime() {
-            var input, filter, table, tr, td, i, txtValue;
-            input = document.getElementById("inputPrezime");
-            filter = input.value.toUpperCase();
-            table = document.getElementById("myTable");
-            tr = table.getElementsByTagName("tr");
-            for (i = 0; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName("td")[0];
-                if (td) {
-                    txtValue = td.textContent || td.innerText;
-                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                        tr[i].style.display = "";
-                    } else {
-                        tr[i].style.display = "none";
-                    }
-                }
-            }
-        }
-        function myFunctionObj() {
-            var input, filter, table, tr, td, i, txtValue;
-            input = document.getElementById("inputObj");
-            filter = input.value.toUpperCase();
-            table = document.getElementById("myTable");
-            tr = table.getElementsByTagName("tr");
-            for (i = 0; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName("td")[1];
-                if (td) {
-                    txtValue = td.textContent || td.innerText;
-                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                        tr[i].style.display = "";
-                    } else {
-                        tr[i].style.display = "none";
-                    }
-                }
-            }
-        }
-        function myFunctionRmj() {
-            var input, filter, table, tr, td, i, txtValue;
-            input = document.getElementById("inputRmj");
-            filter = input.value.toUpperCase();
-            table = document.getElementById("myTable");
-            tr = table.getElementsByTagName("tr");
-            for (i = 0; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName("td")[2];
-                if (td) {
-                    txtValue = td.textContent || td.innerText;
-                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                        tr[i].style.display = "";
-                    } else {
-                        tr[i].style.display = "none";
-                    }
-                }
-            }
-        }
-    </script>
 
 
+    </div>
 </body>
 
 </html>

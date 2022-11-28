@@ -10,26 +10,25 @@ from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.utils.encoding import force_bytes, force_str
 from django.contrib.auth import authenticate, login, logout
 from .models import SaldaKonti
-import pyodbc
+# import pyodbc
+# import pymssql
+import mysql.connector
 
 
-def connect_database(data_base):
-    
-    # # *** WORK\DBBETASOFT SERVER ***
-    # server = 'WORK\DBBETASOFT'    
-    # # server = 'WORK\SQLEXPRESS12'       
-    # # server = 'WORK\SQLEXPRESS14'   
-    # database = data_base
+def connect_database():
+    # # # *** CESTING SERVER ***
+    # server = '213.202.107.109,1433'
+    # database = data_base    
     # username = 'sa'
-    # password = '@betaStudio2017'   
-
-    # # *** CESTING SERVER ***
-    server = '213.202.107.109,1433'
-    database = data_base    
-    username = 'sa'
-    password = '@betaStudio2017'    
-    conn = pyodbc.connect('DRIVER={ODBC Driver 18 for SQL Server};SERVER='+server+';DATABASE='+database+';ENCRYPT=no;UID='+username+';PWD='+ password)
-    
+    # password = '@betaStudio2017'
+    # # conn = pyodbc.connect('DRIVER={ODBC Driver 18 for SQL Server};SERVER='+server+';DATABASE='+database+';ENCRYPT=no;UID='+username+';PWD='+ password)
+    # conn = pyodbc.connect('DRIVER={ODBC Driver 18 for SQL Server};SERVER='+server+';DATABASE='+database+';ENCRYPT=no;UID='+username+';PWD='+ password)
+    conn = mysql.connector.connect(
+        host="178.218.166.150",
+        user="betastudio_sa",
+        password="@korisnik",
+        database="betastudio_dbbetasoft"
+    )
     return conn
 
 
@@ -68,27 +67,31 @@ def signout(request):
 
 
 def rang_lista_kupci(request):
-    conn = connect_database('cesting_2022')
+    conn = connect_database()
     cursor = conn.cursor()
-    query = "select * from web_rang_lista_1200 order by dug desc"
+    query = "select sifra, naziv, duguje from kupci"
     cursor.execute(query)
     result = cursor.fetchall()
     return render(request, "salda_konti_kupci.html", {'SaldaKonti': result})
 
 
 def rang_lista_dobavljaci(request):
-    conn = connect_database('cesting_2022')
+    conn = connect_database()
     cursor = conn.cursor()
-    query = "select * from web_rang_lista_2200 order by pot desc"
+    query = "select sifra, naziv, potrazuje from dobavljaci"
     cursor.execute(query)
     result = cursor.fetchall()
     return render(request, "salda_konti_dobavljaci.html", {'SaldaKonti': result})
 
 
 def analiza_prosjeka_place(request): 
-    conn = connect_database('placa_0000')
+    conn = connect_database()
     cursor = conn.cursor()
-    query = "select * from web_analiza_prosjeka_primanja order by prezime_ime"
+    query = "select * from prosjek_place"
     cursor.execute(query)
     result = cursor.fetchall()
     return render(request, "analiza_prosjeka_place.html", {'AnalizaPlace': result})
+    
+
+def test_konekcije(request):    
+    return render(request, "index.html")

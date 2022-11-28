@@ -20,7 +20,7 @@
             padding: 0;
             height: 100%;
             /* background: #7abecc !important; */
-            background: rgb(201, 206, 207) !important;
+            background: rgb(231, 234, 235) !important;
         }
 
         .user_card {
@@ -28,7 +28,7 @@
             margin-top: auto;
             margin-bottom: auto;
             /* background: #74cfbf; */
-            background: #8abdce;
+            background: rgb(201, 206, 207);
             position: relative;
             display: flex;
             justify-content: center;
@@ -46,7 +46,7 @@
         }
 
         #form-title {
-            color: #fff;
+            color: #161616;
 
         }
 
@@ -93,8 +93,9 @@
     <div class="container">
         <div class="d-flex justify-content-center h-100">
             <div class="user_card">
-                <div class="d-flex justify-content-center">
-                    <h3 id="form-title">Prijava</h3>
+                <br>
+                <div class="d-flex justify-content-center font-weight-bold">
+                    <h4 id="form-title">Prijava</h4>
                 </div>
                 <div class="d-flex justify-content-center form_container">
                     <form method="POST" action="{% url 'signin' %}">
@@ -111,14 +112,16 @@
                             </div>
                             <input type="password" name="pass1" placeholder="Zaporka..." class="form-control">
                         </div>
+                        <br>
 
-                        <div class="d-flex justify-content-center mt-3 login_container">
+                        <div class="d-flex justify-content-center mt-2 login_container">
                             <input class="btn btn-info" type="submit" value="Prijavi se">
                         </div>
                     </form>
-                </div>                                           
+                </div>             
+                <br>                              
                 <div class="mt-2">
-                    <div class="d-flex justify-content-center links">
+                    <div class="d-flex justify-content-center links font-weight-normal">
                         Želite li odustati? <a href="{% url 'home' %}" class="ml-2">Odustani</a>
                     </div>
                 </div>
